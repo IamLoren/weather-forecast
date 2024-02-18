@@ -1,0 +1,12 @@
+.article {
+    width: calc(100vw / 4);
+}
+
+.timer {
+    display: flex;
+}
+.timeWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

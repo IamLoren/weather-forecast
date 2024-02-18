@@ -1,0 +1,10 @@
+.weatherCards {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% / 33.3);
+}
+
+.weatherCard {
+    display: flex;
+    flex-direction: column;
+}
