@@ -3,8 +3,17 @@ import { useFormik } from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { listOfCities } from "../../redux/selectors";
+import { nanoid } from "nanoid";
+import { changeListOfTrips, changeModalOpen } from "../../redux/tripSlice";
 
 const Modal = () => {
+  const dispatch = useDispatch();
+  const citiesList = useSelector(listOfCities);
+  const maxDate = new Date();
+  maxDate.setDate(maxDate.getDate() + 14);
+
   const validationSchema = Yup.object().shape({
     city: Yup.string().required("City is required"),
     startDate: Yup.date().required("Start date is required"),
@@ -18,10 +27,24 @@ const Modal = () => {
       endDate: null,
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values, { resetForm }) => {
+      const { img } = citiesList.find((city) => city.name === values.city);
+      const trip = {
+        ...values,
+        id: nanoid(),
+        img,
+        startDate: values.startDate.toISOString().split("T")[0],
+        endDate: values.endDate.toISOString().split("T")[0],
+      };
+      dispatch(changeListOfTrips(trip));
+      resetForm();
+      dispatch(changeModalOpen(false));
     },
   });
+
+  const cancelTrip = () => {
+    dispatch(changeModalOpen(false));
+  };
 
   return (
     <div>
@@ -39,17 +62,24 @@ const Modal = () => {
               <option value="" disabled hidden>
                 Please select a city
               </option>
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+              {citiesList?.map((city, index) => {
+                return (
+                  <option key={index} value={city.name}>
+                    {city.name}
+                  </option>
+                );
+              })}
             </select>
             {formik.touched.city && formik.errors.city ? (
-          <div>{formik.errors.city}</div>
-        ) : null}
+              <div>{formik.errors.city}</div>
+            ) : null}
           </div>
 
           <label htmlFor="startDate">Start Date</label>
           <DatePicker
+            dateFormat="yyyy-MM-dd"
+            minDate={new Date()}
+            maxDate={maxDate}
             id="startDate"
             placeholderText="Select a date"
             selected={formik.values.startDate}
@@ -57,22 +87,27 @@ const Modal = () => {
               formik.setFieldValue("startDate", startDate)
             }
           />
-           {formik.touched.startDate && formik.errors.startDate ? (
-          <div>{formik.errors.startDate}</div>
-        ) : null}
+          {formik.touched.startDate && formik.errors.startDate ? (
+            <div>{formik.errors.startDate}</div>
+          ) : null}
 
           <label htmlFor="endDate">End date</label>
           <DatePicker
+            dateFormat="yyyy-MM-dd"
+            minDate={new Date()}
+            maxDate={maxDate}
             id="endDate"
             placeholderText="Select a date"
             selected={formik.values.endDate}
             onChange={(endDate) => formik.setFieldValue("endDate", endDate)}
           />
-           {formik.touched.endDate && formik.errors.endDate ? (
-          <div>{formik.errors.endDate}</div>
-        ) : null}
-
-          <button type="submit">Submit</button>
+          {formik.touched.endDate && formik.errors.endDate ? (
+            <div>{formik.errors.endDate}</div>
+          ) : null}
+          <button type="button" onClick={cancelTrip}>
+            Cancel
+          </button>
+          <button type="submit">Save</button>
         </form>
       </div>
     </div>

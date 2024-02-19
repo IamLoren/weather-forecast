@@ -1,3 +1,4 @@
+export const listOfCities = state => state.citiesList;
 export const tripsList = state => state.listOfTrips;
 export const selectedCity = state => state.selectedCity;
 export const weekWeatherInSelectedCity = state => state.weatherInSelectedCity;
