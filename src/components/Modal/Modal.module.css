@@ -1,0 +1,140 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 541px;
+    height: 752px;
+    margin: auto;
+    padding: 40px 35px;
+    background-color: white;
+    box-shadow: 1px 1px 4px lightgray;
+    border-radius: 24px;
+}
+
+.title {
+    padding-bottom: 10px;
+   border-bottom: 1px solid lightgray;
+   margin-bottom: 50px;
+}
+
+.closeButtonWrapper {
+    position: absolute;
+    top: 30px;
+    right: 30px; 
+}
+
+.closeButton { 
+    width: 25px;
+    height: 25px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    height: 79px;
+    margin-bottom: 30px;
+}
+
+.label {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.asterisk {
+    width: 10px;
+    height: 10px;
+}
+
+.calendarIcon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    pointer-events: none;
+}
+
+.select {
+    width: 100%;
+    height: 50px;
+    padding-left: 20px;
+    color: gray;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.datepickerWrapper {
+    width: 100%;
+}
+
+.react-datepicker__input-container {
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    height: 50px;
+    padding: 20px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.errorMessage {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    color: red;
+}
+
+.buttonsWrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+   margin-top: auto;
+   padding-top: 20px;
+   border-top: 1px solid lightgray;
+}
+
+.cancelButton {
+    width: 100px;
+    height: 50px;
+    border: none;
+    transition: all 0.3s;
+}
+.cancelButton:hover {
+    border: 1px solid gray;
+}
+
+.submitButton {
+    width: 100px;
+    height: 50px;
+    border: 1px solid transparent;
+    color: white;
+    background-color: coral;
+    transition: all 0.3s;
+}
+.submitButton:hover {
+    color: coral;
+    background-color: #fff;
+    border-color: coral;
+}

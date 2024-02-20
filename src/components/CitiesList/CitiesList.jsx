@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { tripsList } from "../../redux/selectors.js";
-import s from "./Cities.module.css";
+import s from "./CitiesList.module.css";
 import {
   fetchAllDays,
   fetchTodayWeather,
@@ -24,7 +24,7 @@ const CitiesList = () => {
     }
   };
   return (
-    <ul>
+    <ul className={s.list}>
       {listOfTrips?.map(({ city, startDate, endDate, id, img }) => {
         return (
           <li

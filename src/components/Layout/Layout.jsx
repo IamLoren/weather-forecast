@@ -14,7 +14,7 @@ const Layout = () => {
     const isModalOpen = useSelector(modalOpen);
   return (
     <div className={s.flexWrapper}>
-      <div>
+      <div className={s.leftSideWrapper}>
         <SearchBar />
         <CitiesList />
         <WeekWeather />

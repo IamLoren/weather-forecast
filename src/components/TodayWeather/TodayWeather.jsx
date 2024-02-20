@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { selectedCity, startDateInSelectedCity, today } from "../../redux/selectors";
 import { countdownTimer, fahrenheitToCelsius, getDayOfWeek } from "../../utils";
 import s from "./TodayWeather.module.css";
+import cat from '../../img/cat.png'
+import Icon from "../Icon/Icon";
 
 const TodayWeather = () => {
   const city = useSelector(selectedCity);
@@ -32,24 +34,22 @@ const TodayWeather = () => {
     <>
       {city &&  (
         <article className={s.article}>
-          <img src="" alt="icon" />
-          <p>{date && getDayOfWeek(date)}</p>
+          <img src={cat} alt="icon" className={s.userPhoto}/>
+          <p className={s.weekDay}>{date && getDayOfWeek(date)}</p>
+          <Icon name={todayInCity.days[0].icon}/>
           <p>{temperature && fahrenheitToCelsius(temperature).toFixed()}&#8451;</p>
           <p>{city.city}</p>
           {typeof counter === "object" && (
             <div className={s.timer}>
               <div className={s.timeWrapper}>
                 <span>{counter?.days}</span> <span>DAYS</span>
-              </div>{" "}
-              :{" "}
+              </div>
               <div className={s.timeWrapper}>
                 <span>{counter?.hours}</span> <span>HOURS</span>
-              </div>{" "}
-              :{" "}
+              </div>
               <div className={s.timeWrapper}>
                 <span>{counter?.minutes}</span> <span>MINUTES</span>
-              </div>{" "}
-              :{" "}
+              </div>
               <div className={s.timeWrapper}>
                 <span>{counter?.seconds}</span> <span>SECONDS</span>
               </div>

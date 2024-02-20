@@ -1,0 +1,16 @@
+.list {
+    display: flex;
+    gap: 20px;
+    width: calc((100vw / 3) * 2);
+    overflow-x: scroll;
+}
+.card {
+    min-width: 300px;
+    height: 300px;
+    cursor: pointer;
+}
+
+.cardImg {
+    width: 100%;
+}
+

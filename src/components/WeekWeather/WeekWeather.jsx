@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { weekWeatherInSelectedCity } from '../../redux/selectors'
 import { getDayOfWeek } from '../../utils.js';
 import s from './WeekWeather.module.css';
+import Icon from '../Icon/Icon.jsx';
 
 const WeekWeather = () => {
     const weatherInPeriod = useSelector(weekWeatherInSelectedCity);
@@ -12,7 +13,7 @@ const WeekWeather = () => {
        {weatherInPeriod?.map((dayWeather, index) => {
         return <li key={index} className={s.weatherCard}>
             <span>{getDayOfWeek(dayWeather.datetime)}</span>
-            <img src="" alt="icon" />
+            <Icon className={"icon"} name={dayWeather.icon} />
             <span>{dayWeather.tempmax}&#176;<span></span>/<span>{dayWeather.tempmin}&#176;</span></span>
         </li>
        })} 
