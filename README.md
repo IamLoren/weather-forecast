@@ -1,4 +1,4 @@
- Upon starting the application, user should already have a static list of trips (1 trip). The list is scrollable.
+ Upon starting the application, user already has a static list of trips (1 trip). The list is scrollable.
 
 When user selects a trip from the list, a forecast for each day of the trip is displayed. 
 
