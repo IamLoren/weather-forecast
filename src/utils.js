@@ -47,7 +47,7 @@ export function countdownTimer(targetDate) {
 
   // Перевірка, чи дата в майбутньому
   if (difference < 0) {
-      return "День поїздки настав!";
+      return "The day of the Trip has already arrived!";
   }
 
   // Розрахунок днів, годин, хвилин та секунд

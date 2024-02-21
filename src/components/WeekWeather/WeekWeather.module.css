@@ -2,7 +2,7 @@
     display: flex;
     gap: 20px 10px;
     flex-wrap: wrap;
-    width: calc((100vw / 3) *2);
+    width: calc((100vw / 4) *2);
 
 }
 
@@ -11,4 +11,10 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+    .weatherCards {
+        width: 100%;
+    }
 }

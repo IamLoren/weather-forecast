@@ -4,7 +4,26 @@
     gap: 30px;
     padding: 30px;
 }
-
 .leftSideWrapper {
+    max-width: calc((100vw / 5) * 3);
     flex-shrink: 1;
+}
+
+@media only screen and (max-width: 1000px) {
+    .leftSideWrapper {
+        max-width: calc((100vw / 5) * 2);
+        flex-shrink: 1;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .flexWrapper {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px;
+    }
+    .leftSideWrapper {
+        min-width: 100%;
+       order:2;
+    }
 }

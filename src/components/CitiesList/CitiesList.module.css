@@ -1,7 +1,7 @@
 .list {
     display: flex;
     gap: 20px;
-    width: calc((100vw / 3) * 2);
+    width: 100%;
     overflow-x: scroll;
 }
 .card {
@@ -12,5 +12,9 @@
 
 .cardImg {
     width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+    
 }
 

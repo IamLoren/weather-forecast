@@ -36,29 +36,31 @@ const TodayWeather = () => {
         <article className={s.article}>
           <img src={cat} alt="icon" className={s.userPhoto}/>
           <p className={s.weekDay}>{date && getDayOfWeek(date)}</p>
-          <Icon name={todayInCity.days[0].icon}/>
-          <p>{temperature && fahrenheitToCelsius(temperature).toFixed()}&#8451;</p>
-          <p>{city.city}</p>
+          <p className={s.temperature}>
+          <Icon name={todayInCity?.days?.[0]?.icon}/> 
+          <span>{temperature && fahrenheitToCelsius(temperature).toFixed()}&#8451;</span>
+          </p>
+          <p className={s.city}>{city.city}</p>
           {typeof counter === "object" && (
             <div className={s.timer}>
               <div className={s.timeWrapper}>
-                <span>{counter?.days}</span> <span>DAYS</span>
+                <span className={s.counterNumber}>{counter?.days}</span> <span>DAYS</span>
               </div>
               <div className={s.timeWrapper}>
-                <span>{counter?.hours}</span> <span>HOURS</span>
+                <span className={s.counterNumber}>{counter?.hours}</span> <span>HOURS</span>
               </div>
               <div className={s.timeWrapper}>
-                <span>{counter?.minutes}</span> <span>MINUTES</span>
+                <span className={s.counterNumber}>{counter?.minutes}</span> <span>MINUTES</span>
               </div>
               <div className={s.timeWrapper}>
-                <span>{counter?.seconds}</span> <span>SECONDS</span>
+                <span className={s.counterNumber}>{counter?.seconds}</span> <span>SECONDS</span>
               </div>
             </div>
           )}
           {typeof counter != "object" && <div>{counter}</div>}
         </article>
       )}
-      {!city && <article>HELLO!!!</article>}
+      {!city && <article className={s.helloArticle}><h2 className={s.helloTitle}>Click on the trip card to see the weather in this city today</h2> </article>}
     </>
   );
 };
