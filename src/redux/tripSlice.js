@@ -25,6 +25,8 @@ export const tripSlice = createSlice({
     weatherInSelectedCity: {},
     todayInSelectedCity: {},
     startDateInSelectedCity: '',
+    searchWord: '',
+    searchedTrips: [],
     isModalOpen: false
   },
   reducers: {
@@ -34,6 +36,12 @@ export const tripSlice = createSlice({
     changeSelectedCity: (state, { payload }) => {
       state.selectedCity = payload;
       state.startDateInSelectedCity = payload.startDate;
+    },
+    changeSearchWord: (state, { payload }) => {
+      state.searchWord = payload;    
+    },
+    changeSearchedTrips: (state, { payload }) => {
+      state.searchedTrips = [...payload];    
     },
     changeModalOpen: (state, { payload }) => {
         state.isModalOpen = payload;    
@@ -51,4 +59,4 @@ export const tripSlice = createSlice({
 });
 
 export const tripReducer = tripSlice.reducer;
-export const {changeSelectedCity,changeModalOpen, changeListOfTrips} = tripSlice.actions;
+export const {changeSelectedCity,changeModalOpen, changeSearchedTrips, changeSearchWord, changeListOfTrips} = tripSlice.actions;

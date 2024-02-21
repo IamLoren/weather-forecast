@@ -15,6 +15,7 @@ const Layout = () => {
   return (
     <div className={s.flexWrapper}>
       <div className={s.leftSideWrapper}>
+        <h1 className={s.title}>Weather <span className={s.accentSpan}>Forecast</span></h1>
         <SearchBar />
         <CitiesList />
         <WeekWeather />

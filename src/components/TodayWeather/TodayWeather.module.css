@@ -2,7 +2,6 @@
 .helloArticle {
     flex-shrink: 0;
     width: calc(100vw / 4);
-    height: fit-content;
     padding: 20px 10px;
     background-color: lightskyblue;
     border-radius: 10px;
@@ -48,7 +47,7 @@
 
 .city {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
     font-size: 26px;
 }
 

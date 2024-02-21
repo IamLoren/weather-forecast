@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { tripsList } from "../../redux/selectors.js";
+import { selectedCity, selectedTrips, tripsList } from "../../redux/selectors.js";
 import s from "./CitiesList.module.css";
 import {
   fetchAllDays,
@@ -11,6 +11,9 @@ import { changeSelectedCity } from "../../redux/tripSlice.js";
 const CitiesList = () => {
   const dispatch = useDispatch();
   const listOfTrips = useSelector(tripsList);
+  const selectedCit = useSelector(selectedCity);
+  const searchedTrips = useSelector(selectedTrips);
+
   const allWeather = async (params) => {
     const { city } = params;
     dispatch(changeSelectedCity(params));
@@ -25,15 +28,34 @@ const CitiesList = () => {
   };
   return (
     <ul className={s.list}>
-      {listOfTrips?.map(({ city, startDate, endDate, id, img }) => {
+      {searchedTrips.length>0 && searchedTrips.map(({ city, startDate, endDate, id, img }) => {
         return (
           <li
             key={id}
-            className={s.card}
-            onClick={() => allWeather({ city, startDate, endDate })}
+            className={`${s.card} ${id === selectedCit.id ? s.selected : ''}`}
+            onClick={() => allWeather({ city, startDate, endDate, id })}
           >
             <img src={img} alt="city" className={s.cardImg} />
-            <div>
+            <div className={s.cardDescription}>
+              <p>{city}</p>
+              <p>
+                {startDate.replaceAll("-", ".")} -{" "}
+                {endDate.replaceAll("-", ".")}
+              </p>
+            </div>
+          </li>
+        );
+      })}
+
+      {searchedTrips.length===0 && listOfTrips?.map(({ city, startDate, endDate, id, img }) => {
+        return (
+          <li
+            key={id}
+            className={`${s.card} ${id === selectedCit.id ? s.selected : ''}`}
+            onClick={() => allWeather({ city, startDate, endDate, id })}
+          >
+            <img src={img} alt="city" className={s.cardImg} />
+            <div className={s.cardDescription}>
               <p>{city}</p>
               <p>
                 {startDate.replaceAll("-", ".")} -{" "}

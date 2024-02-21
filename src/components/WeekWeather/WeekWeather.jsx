@@ -9,6 +9,7 @@ const WeekWeather = () => {
     const weatherInPeriod = useSelector(weekWeatherInSelectedCity);
   return (
     <>
+    <h2 className={s.title}>Week</h2>
     {Object.keys(weatherInPeriod).length > 0  && <ul className={s.weatherCards}>
        {weatherInPeriod?.map((dayWeather, index) => {
         return <li key={index} className={s.weatherCard}>

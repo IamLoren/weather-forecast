@@ -5,8 +5,19 @@
     padding: 30px;
 }
 .leftSideWrapper {
-    max-width: calc((100vw / 5) * 3);
+    width: calc((100vw / 5) * 3);
     flex-shrink: 1;
+}
+
+.title {
+    color: lightskyblue;
+    margin-bottom: 30px;
+}
+
+.accentSpan {
+    font-size: 36px;
+    font-weight: 900;
+    color: coral;
 }
 
 @media only screen and (max-width: 1000px) {
