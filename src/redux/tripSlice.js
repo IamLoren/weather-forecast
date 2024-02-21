@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { toast } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { fetchAllDays, fetchTodayWeather } from "../configAxios/operations.js";
 
@@ -32,6 +33,8 @@ export const tripSlice = createSlice({
   reducers: {
     changeListOfTrips: (state, { payload }) => {
         state.listOfTrips.push(payload);
+        const notify = () => toast.success("You have succefully added another trip to your list!");
+        notify();
       },
     changeSelectedCity: (state, { payload }) => {
       state.selectedCity = payload;

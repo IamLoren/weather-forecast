@@ -9,6 +9,7 @@ import s from "./Lajout.module.css";
 import { useSelector } from "react-redux";
 import { modalOpen } from "../../redux/selectors";
 import Modal from "../Modal/Modal";
+import { ToastContainer } from "react-toastify";
 
 const Layout = () => {
     const isModalOpen = useSelector(modalOpen);
@@ -22,6 +23,7 @@ const Layout = () => {
       </div>
       <AddTripButton />
       <TodayWeather />
+      <ToastContainer />
       {isModalOpen && createPortal(
         <Modal />,
         document.body
