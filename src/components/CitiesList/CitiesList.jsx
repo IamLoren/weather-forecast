@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectedCity, selectedTrips, tripsList } from "../../redux/selectors.js";
+import { selectedCity, selectedTrips, tripsList, weekWeatherInSelectedCity } from "../../redux/selectors.js";
 import s from "./CitiesList.module.css";
 import {
   fetchAllDays,
   fetchTodayWeather,
 } from "../../configAxios/operations.js";
-import { changeSelectedCity, deleteCityFromListOfTrips } from "../../redux/tripSlice.js";
+import { changeSelectedCity, clearWeatherInSelectedCity, deleteCityFromListOfTrips } from "../../redux/tripSlice.js";
 
 const CitiesList = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,11 @@ const CitiesList = () => {
   };
 
   const deleteCity = (id) => {
-    dispatch(deleteCityFromListOfTrips(id))
+    dispatch(deleteCityFromListOfTrips(id));
+    if (id === selectedCit.id) {
+      dispatch(changeSelectedCity(''));
+      dispatch(clearWeatherInSelectedCity())
+    }
   }
   return (
     <ul className={s.list}>
@@ -37,11 +41,15 @@ const CitiesList = () => {
           <li
             key={id}
             className={`${s.card} ${id === selectedCit.id ? s.selected : ''}`}
-            onClick={() => allWeather({ city, startDate, endDate, id })}
+            onClick={(event) => {
+              if (event.target.tagName !== "BUTTON") {
+                allWeather({ city, startDate, endDate, id });
+              }
+            }}
           >
             <img src={img} alt="city" className={s.cardImg} />
             <div className={s.cardDescription}>
-              <p className={s.cityAnDeleteWrapper}><span>{city}</span><button type="button" onClick={()=>deleteCity(id)}> - </button></p>
+              <p className={s.cityAnDeleteWrapper}><span>{city}</span><button className={s.deleteButton} type="button" onClick={()=>deleteCity(id)}> - </button></p>
               <p>
                 {startDate.replaceAll("-", ".")} -{" "}
                 {endDate.replaceAll("-", ".")}
@@ -56,11 +64,15 @@ const CitiesList = () => {
           <li
             key={id}
             className={`${s.card} ${id === selectedCit.id ? s.selected : ''}`}
-            onClick={() => allWeather({ city, startDate, endDate, id })}
+            onClick={(event) => {
+              if (event.target.tagName !== "BUTTON") {
+                allWeather({ city, startDate, endDate, id });
+              }
+            }}
           >
             <img src={img} alt="city" className={s.cardImg} />
             <div className={s.cardDescription}>
-            <p className={s.cityAnDeleteWrapper}><span>{city}</span><button type="button"  onClick={()=>deleteCity(id)}> - </button></p>
+            <p className={s.cityAnDeleteWrapper}><span>{city}</span><button className={s.deleteButton} type="button"  onClick={()=>deleteCity(id)}> - </button></p>
               <p>
                 {startDate.replaceAll("-", ".")} -{" "}
                 {endDate.replaceAll("-", ".")}

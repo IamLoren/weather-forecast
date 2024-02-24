@@ -41,6 +41,10 @@ export const tripSlice = createSlice({
         const notify = () => toast.success("You have succefully deleted trip from your list!");
         notify();
       },
+      clearWeatherInSelectedCity: (state) => {
+        state.weatherInSelectedCity = {};
+        state.startDateInSelectedCity = '';
+      },
     changeSelectedCity: (state, { payload }) => {
       state.selectedCity = payload;
       state.startDateInSelectedCity = payload.startDate;
@@ -67,4 +71,4 @@ export const tripSlice = createSlice({
 });
 
 export const tripReducer = tripSlice.reducer;
-export const {changeSelectedCity, deleteCityFromListOfTrips, changeModalOpen, changeSearchedTrips, changeSearchWord, changeListOfTrips} = tripSlice.actions;
+export const {changeSelectedCity, clearWeatherInSelectedCity, deleteCityFromListOfTrips, changeModalOpen, changeSearchedTrips, changeSearchWord, changeListOfTrips} = tripSlice.actions;
