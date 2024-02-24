@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { fetchAllDays, fetchTodayWeather } from "../configAxios/operations.js";
@@ -36,6 +36,11 @@ export const tripSlice = createSlice({
         const notify = () => toast.success("You have succefully added another trip to your list!");
         notify();
       },
+      deleteCityFromListOfTrips: (state, { payload }) => {
+        state.listOfTrips = state.listOfTrips.filter(trip => trip.id !== payload);
+        const notify = () => toast.success("You have succefully deleted trip from your list!");
+        notify();
+      },
     changeSelectedCity: (state, { payload }) => {
       state.selectedCity = payload;
       state.startDateInSelectedCity = payload.startDate;
@@ -62,4 +67,4 @@ export const tripSlice = createSlice({
 });
 
 export const tripReducer = tripSlice.reducer;
-export const {changeSelectedCity,changeModalOpen, changeSearchedTrips, changeSearchWord, changeListOfTrips} = tripSlice.actions;
+export const {changeSelectedCity, deleteCityFromListOfTrips, changeModalOpen, changeSearchedTrips, changeSearchWord, changeListOfTrips} = tripSlice.actions;

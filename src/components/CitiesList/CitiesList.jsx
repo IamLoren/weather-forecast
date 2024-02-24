@@ -6,7 +6,7 @@ import {
   fetchAllDays,
   fetchTodayWeather,
 } from "../../configAxios/operations.js";
-import { changeSelectedCity } from "../../redux/tripSlice.js";
+import { changeSelectedCity, deleteCityFromListOfTrips } from "../../redux/tripSlice.js";
 
 const CitiesList = () => {
   const dispatch = useDispatch();
@@ -26,6 +26,10 @@ const CitiesList = () => {
       console.error("Error fetching weather:", error);
     }
   };
+
+  const deleteCity = (id) => {
+    dispatch(deleteCityFromListOfTrips(id))
+  }
   return (
     <ul className={s.list}>
       {searchedTrips.length>0 && searchedTrips.map(({ city, startDate, endDate, id, img }) => {
@@ -37,7 +41,7 @@ const CitiesList = () => {
           >
             <img src={img} alt="city" className={s.cardImg} />
             <div className={s.cardDescription}>
-              <p>{city}</p>
+              <p className={s.cityAnDeleteWrapper}><span>{city}</span><button type="button" onClick={()=>deleteCity(id)}> - </button></p>
               <p>
                 {startDate.replaceAll("-", ".")} -{" "}
                 {endDate.replaceAll("-", ".")}
@@ -56,7 +60,7 @@ const CitiesList = () => {
           >
             <img src={img} alt="city" className={s.cardImg} />
             <div className={s.cardDescription}>
-              <p>{city}</p>
+            <p className={s.cityAnDeleteWrapper}><span>{city}</span><button type="button"  onClick={()=>deleteCity(id)}> - </button></p>
               <p>
                 {startDate.replaceAll("-", ".")} -{" "}
                 {endDate.replaceAll("-", ".")}

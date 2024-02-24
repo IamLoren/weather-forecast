@@ -27,6 +27,11 @@
     padding: 10px;
 }
 
+.cityAnDeleteWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
 .selected {
     border: 3px solid coral
 }
