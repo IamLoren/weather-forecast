@@ -1,84 +1,25 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectedCity, selectedTrips, tripsList, weekWeatherInSelectedCity } from "../../redux/selectors.js";
+import {useSelector } from "react-redux";
+import { selectedTrips, tripsList} from "../../redux/selectors.js";
 import s from "./CitiesList.module.css";
-import {
-  fetchAllDays,
-  fetchTodayWeather,
-} from "../../configAxios/operations.js";
-import { changeSelectedCity, clearWeatherInSelectedCity, deleteCityFromListOfTrips } from "../../redux/tripSlice.js";
+import CityCard from "../CityCard/CityCard.jsx";
 
 const CitiesList = () => {
-  const dispatch = useDispatch();
   const listOfTrips = useSelector(tripsList);
-  const selectedCit = useSelector(selectedCity);
   const searchedTrips = useSelector(selectedTrips);
 
-  const allWeather = async (params) => {
-    const { city } = params;
-    dispatch(changeSelectedCity(params));
-    try {
-      await Promise.all([
-        dispatch(fetchAllDays(params)),
-        dispatch(fetchTodayWeather(city)),
-      ]);
-    } catch (error) {
-      console.error("Error fetching weather:", error);
-    }
-  };
-
-  const deleteCity = (id) => {
-    dispatch(deleteCityFromListOfTrips(id));
-    if (id === selectedCit.id) {
-      dispatch(changeSelectedCity(''));
-      dispatch(clearWeatherInSelectedCity())
-    }
-  }
+  
   return (
     <ul className={s.list}>
       {searchedTrips.length>0 && searchedTrips.map(({ city, startDate, endDate, id, img }) => {
         return (
-          <li
-            key={id}
-            className={`${s.card} ${id === selectedCit.id ? s.selected : ''}`}
-            onClick={(event) => {
-              if (event.target.tagName !== "BUTTON") {
-                allWeather({ city, startDate, endDate, id });
-              }
-            }}
-          >
-            <img src={img} alt="city" className={s.cardImg} />
-            <div className={s.cardDescription}>
-              <p className={s.cityAnDeleteWrapper}><span>{city}</span><button className={s.deleteButton} type="button" onClick={()=>deleteCity(id)}> - </button></p>
-              <p>
-                {startDate.replaceAll("-", ".")} -{" "}
-                {endDate.replaceAll("-", ".")}
-              </p>
-            </div>
-          </li>
+          <CityCard city={city} startDate={startDate} endDate={endDate} id={id} img={img}/>
         );
       })}
 
       {searchedTrips.length===0 && listOfTrips?.map(({ city, startDate, endDate, id, img }) => {
         return (
-          <li
-            key={id}
-            className={`${s.card} ${id === selectedCit.id ? s.selected : ''}`}
-            onClick={(event) => {
-              if (event.target.tagName !== "BUTTON") {
-                allWeather({ city, startDate, endDate, id });
-              }
-            }}
-          >
-            <img src={img} alt="city" className={s.cardImg} />
-            <div className={s.cardDescription}>
-            <p className={s.cityAnDeleteWrapper}><span>{city}</span><button className={s.deleteButton} type="button"  onClick={()=>deleteCity(id)}> - </button></p>
-              <p>
-                {startDate.replaceAll("-", ".")} -{" "}
-                {endDate.replaceAll("-", ".")}
-              </p>
-            </div>
-          </li>
+          <CityCard city={city} startDate={startDate} endDate={endDate} id={id} img={img}/>
         );
       })}
     </ul>
